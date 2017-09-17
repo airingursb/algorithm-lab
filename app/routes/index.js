@@ -8,5 +8,8 @@ router.get('/', function (req, res, next) {
 router.get('/1-1', function (req, res, next) {
     res.render('canvas_01_01');
 });
+router.get('/1-2', function (req, res, next) {
+    res.render('canvas_01_02');
+});
 exports.default = router;
 //# sourceMappingURL=index.js.map

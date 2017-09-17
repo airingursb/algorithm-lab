@@ -13,17 +13,17 @@ npm install
 node app/bin/www.js --harmony
 ```
 
-Then open Browser at 'http://localhost:3000'
+Then open Browser at 'http://localhost:9009'
 
 ## 修改算法代码
 
-Step 1. 编译 TypeScript
+### Step 1. 编译 TypeScript
 
 ```
 tsc
 ```
 
-Step 2. 打包 js 文件
+### Step 2. 打包 js 文件
 
 需要先安装 browserify
 
@@ -31,7 +31,7 @@ Step 2. 打包 js 文件
 npm install -g browserify
 ```
 
-再进入对应的算法输出目录
+再进入对应的算法输出目录，打包代码
 
 ```
 browserify main.js -o bundle.js
@@ -39,4 +39,4 @@ browserify main.js -o bundle.js
 
 ## Screenshots
 
-![](https://airing.ursb.me/image/cover/lib-sreenshots.png)
+![](http://airing.ursb.me/image/cover/lib-sreenshots.png)

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var app_1 = require("../app");
 var http = require("http");
-var port = normalizePort(process.env.PORT || 3000);
+var port = normalizePort(process.env.PORT || 9009);
 app_1.default.set('port', port);
 var server = http.createServer(app_1.default);
 server.listen(port, onListening);
