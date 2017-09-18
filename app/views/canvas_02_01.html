@@ -2,48 +2,53 @@
 <div class="ui massive breadcrumb">
   <a class="section" href="/">主页</a>
   <span class="divider">/</span>
-  <a class="section" href="/01">1 百人分钱问题</a>
+  <a class="section" href="/01">2 蒙特卡洛算法</a>
   <span class="divider">/</span>
-  <div class="active section">1.1 百人分钱 | 不许负债</div>
+  <div class="active section">2.1 求解圆周率</div>
 </div>
 
 <h2 class="ui header">
-  <div class="content">百人分钱问题</div>
+  <div class="content">求解圆周率</div>
 </h2>
-<p>房间里有100个人，每人都有100元钱，他们在玩一个游戏。每轮游戏中，每个人都要拿出一元钱随机给另一个人，最后这100个人的财富分布是怎样的？</p>
 
 <h3>参考资料</h3>
 <div class="ui bulleted list">
   <div class="item">
-    <a href="http://www.sohu.com/a/159059809_167388">该如何面对这个残酷的世界？ | 搜狐</a>
-  </div>
-  <div class="item">
-    <a href="https://zhuanlan.zhihu.com/p/28052348">关于100个人随机给钱的模拟实验 | 知乎</a>
+    <a href="https://www.zhihu.com/question/20254139">蒙特卡罗算法是什么？ | 知乎</a>
   </div>
 </div>
 
 <div class="ui buttons">
-  <a href="/" class="ui blue button">PREV：主页</a>
+  <a href="/1-2" class="ui blue button">PREV：百人分钱 | 允许负债</a>
   <div class="or"></div>
-  <a href="/1-2" class="ui positive button">NEXT：百人分钱 | 允许负债</a>
+  <a href="/" class="ui positive button">NEXT：</a>
 </div>
 
 <h4 class="ui horizontal divider header">
   <i class="bar chart icon"></i>
   Experiment
 </h4>
-
-<div class="ui statistic container">
-  <div class="label">
-    ROUNDS
+<div class="ui statistics">
+  <div class="statistic">
+    <div class="label">
+      PI
+    </div>
+    <div id="pi" class="value">
+      0
+    </div>
   </div>
-  <div id="rounds" class="value">
-    0
+  <div class="statistic">
+    <div class="label">
+      Count
+    </div>
+    <div id="count" class="value">
+      0
+    </div>
   </div>
 </div>
 
 <div>
-<canvas id="canvas"></canvas>
+  <canvas id="canvas"></canvas>
 </div>
-<script src="javascripts/01-01-A-Money-Experiment-Basics/bundle.js"></script>
+<script src="javascripts/02-01-Get-PI-with-Monte-Carlo/bundle.js"></script>
 <%- include('./footer.html') -%>
