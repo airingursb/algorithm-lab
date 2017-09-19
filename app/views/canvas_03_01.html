@@ -1,0 +1,36 @@
+<%- include('./layout.html') -%>
+<div class="ui massive breadcrumb">
+  <a class="section" href="/">主页</a>
+  <span class="divider">/</span>
+  <a class="section" href="/">3 排序算法</a>
+  <span class="divider">/</span>
+  <div class="active section">3.1 选择排序</div>
+</div>
+
+<h2 class="ui header">
+  <div class="content">选择排序 Selection Sort</div>
+</h2>
+
+<h3>参考资料</h3>
+<div class="ui bulleted list">
+  <div class="item">
+    <a href="http://www.imooc.com/article/20330">深度实战玩转算法——选择排序算法可视化 | 慕课网</a>
+  </div>
+</div>
+
+<div class="ui buttons">
+  <a href="/2-1" class="ui blue button">PREV：求解圆周率</a>
+  <div class="or"></div>
+  <a href="/" class="ui positive button">NEXT：</a>
+</div>
+
+<h4 class="ui horizontal divider header">
+  <i class="bar chart icon"></i>
+  Experiment
+</h4>
+
+<div>
+  <canvas id="canvas"></canvas>
+</div>
+<script src="javascripts/03-01-Selection-Sort-Visualization/bundle.js"></script>
+<%- include('./footer.html') -%>
