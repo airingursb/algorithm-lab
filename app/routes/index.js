@@ -17,5 +17,8 @@ router.get('/2-1', function (req, res, next) {
 router.get('/3-1', function (req, res, next) {
     res.render('canvas_03_01');
 });
+router.get('/3-2', function (req, res, next) {
+    res.render('canvas_03_02');
+});
 exports.default = router;
 //# sourceMappingURL=index.js.map

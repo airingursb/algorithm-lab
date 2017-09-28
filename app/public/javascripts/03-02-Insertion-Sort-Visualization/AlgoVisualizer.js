@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var AlgoFrame_1 = require("./AlgoFrame");
-var SelectionSortData_1 = require("./SelectionSortData");
+var InsertionSortData_1 = require("./InsertionSortData");
 var AlgoVisualizer = (function () {
     function AlgoVisualizer(g2d, sceneWidth, sceneHeight, N) {
         this.DELAY = 40;
         this.g2d = g2d;
-        this.data = new SelectionSortData_1.SelectionSortData(N, sceneHeight);
+        this.data = new InsertionSortData_1.InsertionSortData(N, sceneHeight);
         this.data_list = [];
         this.N = N;
         this.sceneHeight = sceneHeight;
@@ -14,28 +14,21 @@ var AlgoVisualizer = (function () {
         this.run();
     }
     AlgoVisualizer.prototype.run = function () {
-        this.setData(0, -1, -1);
+        this.setData(0, -1);
         for (var i = 0; i < this.data.N(); i++) {
-            var minIndex = i;
-            this.setData(i, -1, minIndex);
-            for (var j = i + 1; j < this.data.N(); j++) {
-                this.setData(i, j, minIndex);
-                if (this.data.get(j) < this.data.get(minIndex)) {
-                    minIndex = j;
-                    this.setData(i, j, minIndex);
-                }
+            this.setData(i, i);
+            for (var j = i; j > 0 && this.data.get(j) < this.data.get(j - 1); j--) {
+                this.data.swap(j, j - 1);
+                this.setData(i + 1, j - 1);
             }
-            this.data.swap(i, minIndex);
-            this.setData(i + 1, -1, -1);
         }
-        this.setData(this.data.N(), -1, -1);
+        this.setData(this.data.N(), -1);
         this.render();
     };
-    AlgoVisualizer.prototype.setData = function (orderedIndex, currentCompareIndex, currentMinIndex) {
-        var data = new SelectionSortData_1.SelectionSortData(this.N, this.sceneHeight);
+    AlgoVisualizer.prototype.setData = function (orderedIndex, currentIndex) {
+        var data = new InsertionSortData_1.InsertionSortData(this.N, this.sceneHeight);
         data.orderedIndex = orderedIndex;
-        data.currentCompareIndex = currentCompareIndex;
-        data.currentMinIndex = currentMinIndex;
+        data.currentIndex = currentIndex;
         data.numbers = this.data.numbers.slice();
         this.data_list[this.data_list.length] = data;
     };

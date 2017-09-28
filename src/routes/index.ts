@@ -23,4 +23,8 @@ router.get('/3-1', (req, res, next) => {
     res.render('canvas_03_01');
 });
 
+router.get('/3-2', (req, res, next) => {
+    res.render('canvas_03_02');
+});
+
 export default router;

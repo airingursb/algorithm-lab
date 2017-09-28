@@ -1,5 +1,5 @@
 import {AlgoFrame} from './AlgoFrame'
-import {SelectionSortData} from './SelectionSortData'
+import {InsertionSortData} from './InsertionSortData'
 
 export class AlgoVisualizer {
 
@@ -19,7 +19,7 @@ export class AlgoVisualizer {
         this.g2d = g2d;
 
         // 初始化数据
-        this.data = new SelectionSortData(N, sceneHeight);
+        this.data = new InsertionSortData(N, sceneHeight);
 
         // 动画整个存储
         this.data_list = [];
@@ -33,33 +33,25 @@ export class AlgoVisualizer {
 
     // 生成数据逻辑
     run() {
-        this.setData(0, -1, -1);
+        this.setData(0, -1);
 
-        for (let i = 0; i < this.data.N(); i++) {
-            // 寻找[i, n) 区间里的最小值的索引
-            // [0,1) 前闭后开 0 <= n < 1
-            let minIndex = i;
-            this.setData(i, -1, minIndex);
-            for (let j = i + 1; j < this.data.N(); j++) {
-                this.setData(i, j, minIndex);
-                if (this.data.get(j) < this.data.get(minIndex)) {
-                    minIndex = j;
-                    this.setData(i, j, minIndex);
-                }
+        for( let i = 0 ; i < this.data.N() ; i ++ ){
+
+            this.setData(i, i);
+            for(let j = i ; j > 0 && this.data.get(j) < this.data.get(j-1) ; j --){
+                this.data.swap(j,j-1);
+                this.setData(i+1, j-1);
             }
-            this.data.swap(i, minIndex);
-            this.setData(i + 1, -1, -1);
         }
-        this.setData(this.data.N(), -1, -1);
+        this.setData(this.data.N(), -1);
         // 渲染数据
         this.render();
     }
 
-    setData(orderedIndex, currentCompareIndex, currentMinIndex) {
-        let data = new SelectionSortData(this.N, this.sceneHeight);
+    setData(orderedIndex, currentIndex) {
+        let data = new InsertionSortData(this.N, this.sceneHeight);
         data.orderedIndex = orderedIndex;
-        data.currentCompareIndex = currentCompareIndex;
-        data.currentMinIndex = currentMinIndex;
+        data.currentIndex = currentIndex;
         data.numbers = this.data.numbers.slice();
         this.data_list[this.data_list.length] = data
     }

@@ -24,11 +24,8 @@ var AlgoFrame = (function () {
             else {
                 AlgoVisHelper_1.AlgoVisHelper.setColor(this.g2d, AlgoVisHelper_1.AlgoVisHelper.Grey);
             }
-            if (i == this.data.currentCompareIndex) {
+            if (i == this.data.currentIndex) {
                 AlgoVisHelper_1.AlgoVisHelper.setColor(this.g2d, AlgoVisHelper_1.AlgoVisHelper.LightBlue);
-            }
-            if (i == this.data.currentMinIndex) {
-                AlgoVisHelper_1.AlgoVisHelper.setColor(this.g2d, AlgoVisHelper_1.AlgoVisHelper.Indigo);
             }
             AlgoVisHelper_1.AlgoVisHelper.fillRectangle(this.g2d, i * w, this.canvasHeight - this.data.get(i), w - 1, this.data.get(i));
         }
@@ -94,12 +91,12 @@ exports.AlgoVisHelper = AlgoVisHelper;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var AlgoFrame_1 = require("./AlgoFrame");
-var SelectionSortData_1 = require("./SelectionSortData");
+var InsertionSortData_1 = require("./InsertionSortData");
 var AlgoVisualizer = (function () {
     function AlgoVisualizer(g2d, sceneWidth, sceneHeight, N) {
         this.DELAY = 40;
         this.g2d = g2d;
-        this.data = new SelectionSortData_1.SelectionSortData(N, sceneHeight);
+        this.data = new InsertionSortData_1.InsertionSortData(N, sceneHeight);
         this.data_list = [];
         this.N = N;
         this.sceneHeight = sceneHeight;
@@ -107,28 +104,21 @@ var AlgoVisualizer = (function () {
         this.run();
     }
     AlgoVisualizer.prototype.run = function () {
-        this.setData(0, -1, -1);
+        this.setData(0, -1);
         for (var i = 0; i < this.data.N(); i++) {
-            var minIndex = i;
-            this.setData(i, -1, minIndex);
-            for (var j = i + 1; j < this.data.N(); j++) {
-                this.setData(i, j, minIndex);
-                if (this.data.get(j) < this.data.get(minIndex)) {
-                    minIndex = j;
-                    this.setData(i, j, minIndex);
-                }
+            this.setData(i, i);
+            for (var j = i; j > 0 && this.data.get(j) < this.data.get(j - 1); j--) {
+                this.data.swap(j, j - 1);
+                this.setData(i + 1, j - 1);
             }
-            this.data.swap(i, minIndex);
-            this.setData(i + 1, -1, -1);
         }
-        this.setData(this.data.N(), -1, -1);
+        this.setData(this.data.N(), -1);
         this.render();
     };
-    AlgoVisualizer.prototype.setData = function (orderedIndex, currentCompareIndex, currentMinIndex) {
-        var data = new SelectionSortData_1.SelectionSortData(this.N, this.sceneHeight);
+    AlgoVisualizer.prototype.setData = function (orderedIndex, currentIndex) {
+        var data = new InsertionSortData_1.InsertionSortData(this.N, this.sceneHeight);
         data.orderedIndex = orderedIndex;
-        data.currentCompareIndex = currentCompareIndex;
-        data.currentMinIndex = currentMinIndex;
+        data.currentIndex = currentIndex;
         data.numbers = this.data.numbers.slice();
         this.data_list[this.data_list.length] = data;
     };
@@ -146,29 +136,28 @@ var AlgoVisualizer = (function () {
 }());
 exports.AlgoVisualizer = AlgoVisualizer;
 
-},{"./AlgoFrame":1,"./SelectionSortData":4}],4:[function(require,module,exports){
+},{"./AlgoFrame":1,"./InsertionSortData":4}],4:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var SelectionSortData = (function () {
-    function SelectionSortData(N, randomBound) {
+var InsertionSortData = (function () {
+    function InsertionSortData(N, randomBound) {
         this.numbers = new Array(N);
         this.orderedIndex = -1;
-        this.currentCompareIndex = -1;
-        this.currentMinIndex = -1;
+        this.currentIndex = -1;
         for (var i = 0; i < N; i++) {
             this.numbers[i] = Math.floor((Math.random() * randomBound)) + 1;
         }
     }
-    SelectionSortData.prototype.N = function () {
+    InsertionSortData.prototype.N = function () {
         return this.numbers.length;
     };
-    SelectionSortData.prototype.get = function (index) {
+    InsertionSortData.prototype.get = function (index) {
         if (index < 0 || index >= this.numbers.length) {
             throw ReferenceError("Invalid index to access Sort Data.");
         }
         return this.numbers[index];
     };
-    SelectionSortData.prototype.swap = function (i, j) {
+    InsertionSortData.prototype.swap = function (i, j) {
         if (i < 0 || i >= this.numbers.length || j < 0 || j >= this.numbers.length) {
             throw ReferenceError("Invalid index to access Sort Data.");
         }
@@ -176,9 +165,9 @@ var SelectionSortData = (function () {
         this.numbers[i] = this.numbers[j];
         this.numbers[j] = t;
     };
-    return SelectionSortData;
+    return InsertionSortData;
 }());
-exports.SelectionSortData = SelectionSortData;
+exports.InsertionSortData = InsertionSortData;
 
 },{}],5:[function(require,module,exports){
 "use strict";
