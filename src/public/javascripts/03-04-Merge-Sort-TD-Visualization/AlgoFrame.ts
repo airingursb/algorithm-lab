@@ -7,7 +7,7 @@ export class AlgoFrame{
     private canvasHeight;
     private data;
 
-    constructor(g2d, canvasWidth, canvasHeight) {
+    constructor(g2d, title, canvasWidth, canvasHeight) {
         this.g2d = g2d;
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;

@@ -10,7 +10,7 @@ var AlgoVisualizer = (function () {
         this.data_list = [];
         this.N = N;
         this.sceneHeight = sceneHeight;
-        this.frame = new AlgoFrame_1.AlgoFrame(g2d, "Selection Sort Visualization", sceneWidth, sceneHeight);
+        this.frame = new AlgoFrame_1.AlgoFrame(g2d, sceneWidth, sceneHeight);
         this.run();
     }
     AlgoVisualizer.prototype.run = function () {

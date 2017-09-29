@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var AlgoVisHelper_1 = require("./AlgoVisHelper");
 var AlgoFrame = (function () {
-    function AlgoFrame(g2d, title, canvasWidth, canvasHeight) {
+    function AlgoFrame(g2d, canvasWidth, canvasHeight) {
         this.g2d = g2d;
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;

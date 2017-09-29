@@ -27,7 +27,7 @@ export class AlgoVisualizer {
         this.sceneHeight = sceneHeight;
 
         // 初始化视图
-        this.frame = new AlgoFrame(g2d, "Selection Sort Visualization", sceneWidth, sceneHeight);
+        this.frame = new AlgoFrame(g2d, sceneWidth, sceneHeight);
         this.run();
     }
 

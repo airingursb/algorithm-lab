@@ -17,17 +17,14 @@ var AlgoFrame = (function () {
         this.g2d.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
         var w = this.canvasWidth / this.data.N();
         for (var i = 0; i < this.data.N(); i++) {
-            if (i < this.data.orderedIndex) {
-                AlgoVisHelper_1.AlgoVisHelper.setColor(this.g2d, AlgoVisHelper_1.AlgoVisHelper.Red);
+            if (i >= this.data.l && i <= this.data.r) {
+                AlgoVisHelper_1.AlgoVisHelper.setColor(this.g2d, AlgoVisHelper_1.AlgoVisHelper.Green);
             }
             else {
                 AlgoVisHelper_1.AlgoVisHelper.setColor(this.g2d, AlgoVisHelper_1.AlgoVisHelper.Grey);
             }
-            if (i == this.data.currentCompareIndex) {
-                AlgoVisHelper_1.AlgoVisHelper.setColor(this.g2d, AlgoVisHelper_1.AlgoVisHelper.LightBlue);
-            }
-            if (i == this.data.currentMinIndex) {
-                AlgoVisHelper_1.AlgoVisHelper.setColor(this.g2d, AlgoVisHelper_1.AlgoVisHelper.Indigo);
+            if (i >= this.data.l && i <= this.data.mergeIndex) {
+                AlgoVisHelper_1.AlgoVisHelper.setColor(this.g2d, AlgoVisHelper_1.AlgoVisHelper.Red);
             }
             AlgoVisHelper_1.AlgoVisHelper.fillRectangle(this.g2d, i * w, this.canvasHeight - this.data.get(i), w - 1, this.data.get(i));
         }
