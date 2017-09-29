@@ -1,17 +1,15 @@
-export class InsertionSortData {
+export class MergeSortData {
 
     public numbers;
-    public orderedIndex;
-    public currentIndex;
+    public l;
+    public r;
+    public mergeIndex;
 
     constructor(N: number, randomBound: number) {
 
         this.numbers = new Array(N);
-        this.orderedIndex = -1;         // [0...orderedIndex) 是有序的
-        this.currentIndex = -1;         // 当前正在比较的元素索引
-
         for (let i = 0; i < N; i++) {
-            this.numbers[i] = Math.floor((Math.random() * randomBound)) + 1;
+            this.numbers[i] = Math.floor(Math.random() * randomBound) + 1;
         }
     }
 

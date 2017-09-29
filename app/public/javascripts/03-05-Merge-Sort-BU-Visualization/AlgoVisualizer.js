@@ -15,18 +15,12 @@ var AlgoVisualizer = (function () {
     }
     AlgoVisualizer.prototype.run = function () {
         this.setData(-1, -1, -1);
-        this.mergeSort(0, this.data.N() - 1);
+        this.setData(-1, -1, -1);
+        for (var sz = 1; sz < this.data.N(); sz *= 2)
+            for (var i = 0; i < this.data.N() - sz; i += sz + sz)
+                this.merge(i, i + sz - 1, Math.min(i + sz + sz - 1, this.data.N() - 1));
         this.setData(0, this.data.N() - 1, this.data.N() - 1);
         this.render();
-    };
-    AlgoVisualizer.prototype.mergeSort = function (l, r) {
-        if (l >= r)
-            return;
-        this.setData(l, r, -1);
-        var mid = Math.floor((l + r) / 2);
-        this.mergeSort(l, mid);
-        this.mergeSort(mid + 1, r);
-        this.merge(l, mid, r);
     };
     AlgoVisualizer.prototype.merge = function (l, mid, r) {
         var aux = [];
