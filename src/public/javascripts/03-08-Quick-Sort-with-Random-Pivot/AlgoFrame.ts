@@ -1,0 +1,53 @@
+import {AlgoVisHelper} from './AlgoVisHelper'
+
+export class AlgoFrame {
+
+    private g2d;
+    private canvasWidth;
+    private canvasHeight;
+    private data;
+
+    constructor(g2d, canvasWidth, canvasHeight) {
+        this.g2d = g2d;
+        this.canvasWidth = canvasWidth;
+        this.canvasHeight = canvasHeight;
+    }
+
+    getCanvasWidth() {
+        return this.canvasWidth;
+    }
+
+    getCanvasHeight() {
+        return this.canvasHeight;
+    }
+
+    repaint() {
+        // 具体绘制
+        this.g2d.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+
+        let w = this.canvasWidth / this.data.N();
+
+        for (let i = 0; i < this.data.N(); i++) {
+            if (i >= this.data.l && i <= this.data.r) {
+                AlgoVisHelper.setColor(this.g2d, AlgoVisHelper.Green);
+            }
+            else {
+                AlgoVisHelper.setColor(this.g2d, AlgoVisHelper.Grey);
+            }
+
+            if( i == this.data.curPivot )
+                AlgoVisHelper.setColor(this.g2d, AlgoVisHelper.Indigo);
+            if( i == this.data.curElement)
+                AlgoVisHelper.setColor(this.g2d, AlgoVisHelper.LightBlue);
+            if( this.data.fixedPivots[i] )
+                AlgoVisHelper.setColor(this.g2d, AlgoVisHelper.Red);
+
+            AlgoVisHelper.fillRectangle(this.g2d, i * w, this.canvasHeight - this.data.get(i), w - 1, this.data.get(i));
+        }
+    }
+
+    render(data) {
+        this.data = data;
+        this.repaint();
+    }
+}

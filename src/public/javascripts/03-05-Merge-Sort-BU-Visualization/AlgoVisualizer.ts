@@ -35,8 +35,6 @@ export class AlgoVisualizer {
     run() {
         this.setData(-1, -1, -1);
 
-        this.setData(-1, -1, -1);
-
         for (let sz = 1; sz < this.data.N(); sz *= 2)
             for (let i = 0; i < this.data.N() - sz; i += sz + sz)
                 // 对 arr[i...i+sz-1] 和 arr[i+sz...i+2*sz-1] 进行归并

@@ -1,0 +1,31 @@
+<%- include('./layout.html') -%>
+<div class="ui massive breadcrumb">
+  <a class="section" href="/">主页</a>
+  <span class="divider">/</span>
+  <a class="section" href="/">3 排序算法</a>
+  <span class="divider">/</span>
+  <div class="active section">3.6 快速排序</div>
+</div>
+
+<h2 class="ui header">
+  <div class="content">快速排序 Quick Sort</div>
+</h2>
+
+<p>快速排序是对冒泡排序的一种改进。快速排序由C. A. R. Hoare在1962年提出。它的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。快速排序不是一种稳定的排序算法，它是目前最有效率的排序算法，时间复杂度为O(nlogn)。</p>
+
+<div class="ui buttons">
+  <a href="/3-5" class="ui blue button">PREV：归并排序 | 自底向上</a>
+  <div class="or"></div>
+  <a href="/3-7" class="ui positive button">NEXT：快速排序 | 近乎有序</a>
+</div>
+
+<h4 class="ui horizontal divider header">
+  <i class="bar chart icon"></i>
+  Experiment
+</h4>
+
+<div>
+  <canvas id="canvas"></canvas>
+</div>
+<script src="javascripts/03-06-Quick-Sort-Visualization/bundle.js"></script>
+<%- include('./footer.html') -%>

@@ -29,5 +29,14 @@ router.get('/3-4', function (req, res, next) {
 router.get('/3-5', function (req, res, next) {
     res.render('canvas_03_05');
 });
+router.get('/3-6', function (req, res, next) {
+    res.render('canvas_03_06');
+});
+router.get('/3-7', function (req, res, next) {
+    res.render('canvas_03_07');
+});
+router.get('/3-8', function (req, res, next) {
+    res.render('canvas_03_08');
+});
 exports.default = router;
 //# sourceMappingURL=index.js.map

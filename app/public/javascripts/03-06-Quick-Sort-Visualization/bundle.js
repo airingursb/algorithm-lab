@@ -24,9 +24,12 @@ var AlgoFrame = (function () {
             else {
                 AlgoVisHelper_1.AlgoVisHelper.setColor(this.g2d, AlgoVisHelper_1.AlgoVisHelper.Grey);
             }
-            if (i >= this.data.l && i <= this.data.mergeIndex) {
+            if (i == this.data.curPivot)
+                AlgoVisHelper_1.AlgoVisHelper.setColor(this.g2d, AlgoVisHelper_1.AlgoVisHelper.Indigo);
+            if (i == this.data.curElement)
+                AlgoVisHelper_1.AlgoVisHelper.setColor(this.g2d, AlgoVisHelper_1.AlgoVisHelper.LightBlue);
+            if (this.data.fixedPivots[i])
                 AlgoVisHelper_1.AlgoVisHelper.setColor(this.g2d, AlgoVisHelper_1.AlgoVisHelper.Red);
-            }
             AlgoVisHelper_1.AlgoVisHelper.fillRectangle(this.g2d, i * w, this.canvasHeight - this.data.get(i), w - 1, this.data.get(i));
         }
     };
@@ -91,12 +94,12 @@ exports.AlgoVisHelper = AlgoVisHelper;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var AlgoFrame_1 = require("./AlgoFrame");
-var MergeSortData_1 = require("./MergeSortData");
+var QuickSortData_1 = require("./QuickSortData");
 var AlgoVisualizer = (function () {
     function AlgoVisualizer(g2d, sceneWidth, sceneHeight, N) {
         this.DELAY = 40;
         this.g2d = g2d;
-        this.data = new MergeSortData_1.MergeSortData(N, sceneHeight);
+        this.data = new QuickSortData_1.QuickSortData(N, sceneHeight);
         this.data_list = [];
         this.N = N;
         this.sceneHeight = sceneHeight;
@@ -104,44 +107,47 @@ var AlgoVisualizer = (function () {
         this.run();
     }
     AlgoVisualizer.prototype.run = function () {
-        this.setData(-1, -1, -1);
-        for (var sz = 1; sz < this.data.N(); sz *= 2)
-            for (var i = 0; i < this.data.N() - sz; i += sz + sz)
-                this.merge(i, i + sz - 1, Math.min(i + sz + sz - 1, this.data.N() - 1));
-        this.setData(0, this.data.N() - 1, this.data.N() - 1);
+        this.setData(-1, -1, -1, -1, -1);
+        this.quickSort(0, this.data.N() - 1);
+        this.setData(-1, -1, -1, -1, -1);
         this.render();
     };
-    AlgoVisualizer.prototype.merge = function (l, mid, r) {
-        var aux = [];
-        for (var a = l; a < r + 1; a++) {
-            aux.push(this.data.numbers[a]);
+    AlgoVisualizer.prototype.quickSort = function (l, r) {
+        if (l > r)
+            return;
+        if (l == r) {
+            this.setData(l, r, l, -1, -1);
+            return;
         }
-        var i = l, j = mid + 1;
-        for (var k = l; k <= r; k++) {
-            if (i > mid) {
-                this.data.numbers[k] = aux[j - l];
-                j++;
-            }
-            else if (j > r) {
-                this.data.numbers[k] = aux[i - l];
-                i++;
-            }
-            else if (aux[i - l] < aux[j - l]) {
-                this.data.numbers[k] = aux[i - l];
-                i++;
-            }
-            else {
-                this.data.numbers[k] = aux[j - l];
-                j++;
-            }
-            this.setData(l, r, k);
-        }
+        this.setData(l, r, -1, -1, -1);
+        var p = this.partition(l, r);
+        this.quickSort(l, p - 1);
+        this.quickSort(p + 1, r);
     };
-    AlgoVisualizer.prototype.setData = function (l, r, mergeIndex) {
-        var data = new MergeSortData_1.MergeSortData(this.N, this.sceneHeight);
+    AlgoVisualizer.prototype.partition = function (l, r) {
+        var v = this.data.get(l);
+        this.setData(l, r, -1, l, -1);
+        var j = l;
+        for (var i = l + 1; i <= r; i++) {
+            this.setData(l, r, -1, l, i);
+            if (this.data.get(i) < v) {
+                j++;
+                this.data.swap(j, i);
+                this.setData(l, r, -1, l, i);
+            }
+        }
+        this.data.swap(l, j);
+        this.setData(l, r, j, -1, -1);
+        return j;
+    };
+    AlgoVisualizer.prototype.setData = function (l, r, fixedPivot, curPivot, curElement) {
+        var data = new QuickSortData_1.QuickSortData(this.N, this.sceneHeight);
         data.l = l;
         data.r = r;
-        data.mergeIndex = mergeIndex;
+        if (fixedPivot != -1)
+            data.fixedPivots[fixedPivot] = true;
+        data.curPivot = curPivot;
+        data.curElement = curElement;
         data.numbers = this.data.numbers.slice();
         this.data_list[this.data_list.length] = data;
     };
@@ -159,26 +165,28 @@ var AlgoVisualizer = (function () {
 }());
 exports.AlgoVisualizer = AlgoVisualizer;
 
-},{"./AlgoFrame":1,"./MergeSortData":4}],4:[function(require,module,exports){
+},{"./AlgoFrame":1,"./QuickSortData":4}],4:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var MergeSortData = (function () {
-    function MergeSortData(N, randomBound) {
+var QuickSortData = (function () {
+    function QuickSortData(N, randomBound) {
         this.numbers = new Array(N);
+        this.fixedPivots = new Array(N);
         for (var i = 0; i < N; i++) {
             this.numbers[i] = Math.floor(Math.random() * randomBound) + 1;
+            this.fixedPivots[i] = false;
         }
     }
-    MergeSortData.prototype.N = function () {
+    QuickSortData.prototype.N = function () {
         return this.numbers.length;
     };
-    MergeSortData.prototype.get = function (index) {
+    QuickSortData.prototype.get = function (index) {
         if (index < 0 || index >= this.numbers.length) {
             throw ReferenceError("Invalid index to access Sort Data.");
         }
         return this.numbers[index];
     };
-    MergeSortData.prototype.swap = function (i, j) {
+    QuickSortData.prototype.swap = function (i, j) {
         if (i < 0 || i >= this.numbers.length || j < 0 || j >= this.numbers.length) {
             throw ReferenceError("Invalid index to access Sort Data.");
         }
@@ -186,9 +194,9 @@ var MergeSortData = (function () {
         this.numbers[i] = this.numbers[j];
         this.numbers[j] = t;
     };
-    return MergeSortData;
+    return QuickSortData;
 }());
-exports.MergeSortData = MergeSortData;
+exports.QuickSortData = QuickSortData;
 
 },{}],5:[function(require,module,exports){
 "use strict";

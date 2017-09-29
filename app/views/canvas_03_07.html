@@ -1,0 +1,31 @@
+<%- include('./layout.html') -%>
+<div class="ui massive breadcrumb">
+  <a class="section" href="/">主页</a>
+  <span class="divider">/</span>
+  <a class="section" href="/">3 排序算法</a>
+  <span class="divider">/</span>
+  <div class="active section">3.7 快速排序 | 近乎有序</div>
+</div>
+
+<h2 class="ui header">
+  <div class="content">快速排序 | 近乎有序 Quick Sort</div>
+</h2>
+
+<p>快速排序在数组近乎有序的情况下，会退化成O(n^2)的算法。</p>
+
+<div class="ui buttons">
+  <a href="/3-6" class="ui blue button">PREV：快速排序</a>
+  <div class="or"></div>
+  <a href="/3-8" class="ui positive button">NEXT：快速排序 | 随机定点</a>
+</div>
+
+<h4 class="ui horizontal divider header">
+  <i class="bar chart icon"></i>
+  Experiment
+</h4>
+
+<div>
+  <canvas id="canvas"></canvas>
+</div>
+<script src="javascripts/03-07-Quick-Sort-with-Nearly-Ordered-Array/bundle.js"></script>
+<%- include('./footer.html') -%>
