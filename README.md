@@ -20,6 +20,10 @@
     6. [快速排序 Quick Sort](http://lib.ursb.me/3-6)
     7. [快速排序 | 近乎有序 Quick Sort with Nearly Ordered Array](http://lib.ursb.me/3-7)
     8. [快速排序 | 随机定点 Quick Sort with Random Pivot](http://lib.ursb.me/3-8)
+    9. [快速排序 | 完全一致 Quick Sort with Identical Array](http://lib.ursb.me/3-9)
+    10. [双路快速排序 Two Ways Quick Sort](http://lib.ursb.me/3-10)
+    11. [双路快速排序 | 完全一致 Two Ways Quick Sort with Identical Array](http://lib.ursb.me/3-11)
+    12. [三路快速排序 Three Ways Quick Sort](http://lib.ursb.me/3-12)
 ## 安装
 
 ```

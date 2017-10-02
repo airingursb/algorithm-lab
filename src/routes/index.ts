@@ -51,4 +51,20 @@ router.get('/3-8', (req, res, next) => {
     res.render('canvas_03_08');
 });
 
+router.get('/3-9', (req, res, next) => {
+    res.render('canvas_03_09');
+});
+
+router.get('/3-10', (req, res, next) => {
+    res.render('canvas_03_10');
+});
+
+router.get('/3-11', (req, res, next) => {
+    res.render('canvas_03_11');
+});
+
+router.get('/3-12', (req, res, next) => {
+    res.render('canvas_03_12');
+});
+
 export default router;

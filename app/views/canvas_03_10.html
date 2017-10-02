@@ -1,0 +1,29 @@
+<%- include('./layout.html') -%>
+<div class="ui massive breadcrumb">
+  <a class="section" href="/">主页</a>
+  <span class="divider">/</span>
+  <a class="section" href="/">3 排序算法</a>
+  <span class="divider">/</span>
+  <div class="active section">3.10 双路快速排序</div>
+</div>
+
+<h2 class="ui header">
+  <div class="content">双路快速排序 Two Ways Quick Sort</div>
+</h2>
+
+<div class="ui buttons">
+  <a href="/3-8" class="ui blue button">PREV：快速排序 | 随机定点</a>
+  <div class="or"></div>
+  <a href="/3-11" class="ui positive button">NEXT：双路快速排序 | 完全一致</a>
+</div>
+
+<h4 class="ui horizontal divider header">
+  <i class="bar chart icon"></i>
+  Experiment
+</h4>
+
+<div>
+  <canvas id="canvas"></canvas>
+</div>
+<script src="javascripts/03-10-Two-Ways-Quick-Sort/bundle.js"></script>
+<%- include('./footer.html') -%>

@@ -38,5 +38,17 @@ router.get('/3-7', function (req, res, next) {
 router.get('/3-8', function (req, res, next) {
     res.render('canvas_03_08');
 });
+router.get('/3-9', function (req, res, next) {
+    res.render('canvas_03_09');
+});
+router.get('/3-10', function (req, res, next) {
+    res.render('canvas_03_10');
+});
+router.get('/3-11', function (req, res, next) {
+    res.render('canvas_03_11');
+});
+router.get('/3-12', function (req, res, next) {
+    res.render('canvas_03_12');
+});
 exports.default = router;
 //# sourceMappingURL=index.js.map
